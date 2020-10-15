@@ -1,6 +1,4 @@
-# SAE_citystat
-
-panelvar
+SAE_citystat
 =========
 
 Experimental tools Small Area Estimation for city statistics and other functional areas.
