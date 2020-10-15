@@ -1,7 +1,7 @@
 SAE_citystat
 =========
 
-Experimental tools Small Area Estimation for city statistics and other functional areas.
+Experimental tools for Small Area Estimation (SAE) for city statistics and other functional areas.
 ---
 
 The material provided herein will enable you to reproduce the experiments presented in _Eurostat_ statistical working paper on [**Small area estimation for city statistics and other functional geographies**](https://ec.europa.eu/eurostat/web/products-statistical-working-papers/-/KS-TC-19-006) (_cite this source code or the reference's doi: [10.2785/600130](http://dx.doi.org/10.2785/898627)_). Further details see the in the working paper ([below](#References)).
