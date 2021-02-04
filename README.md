@@ -4,7 +4,7 @@ SAE_citystat
 Experimental tools for Small Area Estimation (SAE) for city statistics and other functional areas.
 ---
 
-The material provided herein will enable you to reproduce the experiments presented in _Eurostat_ statistical working paper on [**Small area estimation for city statistics and other functional geographies**](https://ec.europa.eu/eurostat/web/products-statistical-working-papers/-/KS-TC-19-006) (_cite this source code or the reference's doi: [10.2785/600130](http://dx.doi.org/10.2785/898627)_). Further details see the in the working paper ([below](#References)).
+The material provided herein will enable you to reproduce the experiments presented in _Eurostat_ statistical working paper on [**Small area estimation for city statistics and other functional geographies**](https://ec.europa.eu/eurostat/web/products-statistical-working-papers/-/KS-TC-19-006) (_cite this source code or the reference's doi: [10.2785/898627](http://dx.doi.org/10.2785/898627)_). Further details see the in the working paper ([below](#References)).
 
 **Description**
 
@@ -41,5 +41,5 @@ The material provided herein will enable you to reproduce the experiments presen
 
 **<a name="References"></a>References** 
 
-* Kapetanios G., Marcellino M., Papailias F. and Mazzi G.L. (2020): [**New methods for timely estimates**](https://ec.europa.eu/eurostat/web/products-statistical-working-papers/-/KS-TC-20-005), _Eurostat_ Statistical Working Paper KS-TC-20-005-EN, doi: [10.2785/600130](http://dx.doi.org/10.2785/600130).
+* Münnich R., Burgard J. B., Ertz F., Lenau S., Manecke J., and Merkle H (2019): [[**Small area estimation for city statistics and other functional geographies**](https://ec.europa.eu/eurostat/web/products-statistical-working-papers/-/KS-TC-19-006), _Eurostat_ Statistical Working Paper KS-TC-19-006-EN, doi: [10.2785/898627](http://dx.doi.org/10.2785/898627).
 
