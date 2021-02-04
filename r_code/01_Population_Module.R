@@ -117,7 +117,7 @@ if(any(miss_files)) {
     } else {
         user_input <- readline(user_q)
     }
-  
+    if (length(user_input)==0|nchar(user_input)==0) {user_input <- "Y"}
     if (user_input %in% c("y", "Y", "yes", "YES", "Yes")){
         for (lvl in c("P", "HH")){
             amelia.file <- paste0(data.path, "AMELIA_", lvl,
@@ -156,7 +156,7 @@ if(any(miss_files)) {
 cat("Loading data...\n")
 data <- lapply(X = grep(x = unlist(load.files), pattern = "PAML", value = TRUE),
                FUN = function(x){
-                   get(load(paste0(data.path, #"AMELIA_P_level_", aver, "/", 
+                   get(load(paste0(data.path, "AMELIA_P_level_", aver, "/", 
                                    x)))
               })
 setDT(data)
