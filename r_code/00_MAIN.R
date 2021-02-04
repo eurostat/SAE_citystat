@@ -20,6 +20,7 @@ cat("\n\nChecking if scripts are present...\n")
 script_names <- c("01_Population_Module.R", "02_Sampling_Module.R",
                   "03_SAE_DataPreparation.R", "04_SAE_SampleEstimation.R",
                   "05_SAE_EstimationFunctions.R")
+setwd("r_code")
 # list of files in current working directory
 wd_files <- list.files("./")
 # vector of missing scripts
