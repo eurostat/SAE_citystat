@@ -20,7 +20,7 @@
 #   It ilustrates the generation of the population data set,
 #   consisting of the AMELIA variables
 #   
-#   PROV    (Regional identifier: NUTS2)
+#   PROV    (Regional identifier: NUTS2) 
 #   DIS     (Regional identifier: District)
 #   CIT     (Regional identifier: City/Community)
 #   DOU     (Degree of urbanisation of CIT)
@@ -81,7 +81,7 @@ cat("\n\nChecking if data is present...\n")
 # list variables that will be loaded
 variables <- c("PROV", "DIS", "CIT", "DOU", "HID", "PID", "AGE", "EDI")
 # list of files in current working directory
-wd_files <- list.files(paste0(data.path, "AMELIA_P_level_", aver),
+wd_files <- list.files(data.path ,
                        pattern = ".RData")
 # check which variables are present
 load.files <- lapply(X = variables, FUN = function(x){
@@ -108,35 +108,42 @@ if (any(miss_files)){
     cat("Data is present!\n")
 }
 # Offer to download AMELIA
-if(any(miss_files)) {
-    user_q <- paste0("Do you want to download a complete version of AMELIA?",
+  if(any(miss_files)) {
+    for (lvl in c("P", "HH")){
+      amelia.file <- paste0("AMELIA_", lvl,
+                        "_level_", aver, ".zip")
+      if (!file.exists(file.path(data.path,amelia.file))){
+        user_q <- paste0("Do you want to download a complete version of AMELIA ",lvl," data(",amelia.file,")?",
                      "[Y/n] \n")
-    if (!interactive()) {
-        cat(user_q)
-        user_input <- readLines("stdin", n = 1) 
-    } else {
-        user_input <- readline(user_q)
-    }
-    if (length(user_input)==0|nchar(user_input)==0) {user_input <- "Y"}
-    if (user_input %in% c("y", "Y", "yes", "YES", "Yes")){
-        for (lvl in c("P", "HH")){
-            amelia.file <- paste0(data.path, "AMELIA_", lvl,
-                                  "_level_", aver, ".zip")
-            cat(paste("Downloading", lvl, "data...\n"))
-            download.file(url = paste0("http://amelia.uni-trier.de/",
-                                       "wp-content/", "uploads/", "2019/",
-                                       "12/", "AMELIA_", lvl,
-                                       "_level_", aver, ".zip"),
-                          destfile = amelia.file)
-            cat(paste("Extracting", lvl, "data...\n"))
-            unzip(amelia.file, exdir = paste0(data.path, "AMELIA_", lvl,
-                                                                "_level_", aver),
-                  junkpaths = TRUE)
+        if (!interactive()) {
+          cat(user_q)
+          user_input <- readLines("stdin", n = 1) 
+        } else {
+          user_input <- readline(user_q)
         }
-    } else {
-        stop("Aborting, as AMELIA input files are missing!\n")
-    }
-  
+        if (length(user_input)==0|nchar(user_input)==0) {user_input <- "Y"}
+        if (user_input %in% c("y", "Y", "yes", "YES", "Yes")){
+          dmethod <- "auto"
+          cat(paste("Downloading", lvl, "data...\n"))
+          tryCatch({download.file(url = paste0("http://amelia.uni-trier.de/",
+                                               "wp-content/", "uploads/", "2019/",
+                                               "12/", "AMELIA_", lvl,
+                                               "_level_", aver, ".zip"),
+                                  destfile = file.path(data.path,amelia.file), method=dmethod,quiet = TRUE)},
+                   error = function(e) {
+                     message("Error by the download of the  file:",amelia.file,'\n',paste(unlist(e),collapse="\n"))
+                   },
+                   warning = function(w) {
+                     message("Warning during the download of the file:",amelia.file,'\n',paste(unlist(w),collapse="\n"))
+                   })
+        } else {
+          stop("Aborting, as AMELIA input files are missing!\n")
+        }
+      } 
+      cat(paste("Extracting", lvl, "data...\n"))
+      unzip(file.path(data.path,amelia.file), exdir = data.path, junkpaths = TRUE)
+    }  
+  }
     amelia.files <- list.files(data.path, recursive = TRUE, pattern = ".RData")
     load.files <- lapply(X = variables, FUN = function(x){
                              grep(x = amelia.files, pattern = x,
@@ -150,13 +157,13 @@ if(any(miss_files)) {
                     "http://amelia.uni-trier.de/", "wp-content/", "uploads/",
                     "2019/", "12/", "AMELIA_P_level_", aver, "zip","\n",
                     "to the directory:\n", data.path, "\n\n"))  
-    }
-} 
+  }
+ 
 
 cat("Loading data...\n")
 data <- lapply(X = grep(x = unlist(load.files), pattern = "PAML", value = TRUE),
                FUN = function(x){
-                   get(load(paste0(data.path, "AMELIA_P_level_", aver, "/", 
+                   get(load(paste0(data.path, # "AMELIA_P_level_", aver, "/", 
                                    x)))
               })
 setDT(data)

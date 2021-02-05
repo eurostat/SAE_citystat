@@ -60,7 +60,7 @@ if (!try(length(aver), silent = TRUE) < 1 && TRUE) aver <- "v0.2.3"
 
 # CITL variable at household-level ------------------------
 cat("Load CIT at household level...\n")
-citl.hh.path <- paste0(data.path, "AMELIA_HH_level_", aver, "/",
+citl.hh.path <- paste0(data.path, 
                        "HAML.CIT_", aver, ".RData")
 load(citl.hh.path)
 
@@ -82,7 +82,7 @@ CITL_HH <- factor(CITL_HH)
 
 # CITL variable at person-level ---------------------------
 cat("Load CIT at person level...\n")
-citl.pl.path <- paste0(data.path, "AMELIA_P_level_", aver, "/",
+citl.pl.path <- paste0(data.path, 
                        "PAML.CIT_", aver, ".RData")
 load(citl.pl.path)
 
@@ -112,12 +112,12 @@ cat("Load multiple person level variables...\n")
 Var <- c("HHS", "REG", "DOU", "AGE","COB", "ISCED", "EDU", "BAS", "SEM", "SUP", 
          "UEP", "SEX")
 for(v in 1:length(Var)){
-    v.path <- paste0(data.path, "AMELIA_P_level_", aver, "/",
+    v.path <- paste0(data.path,  
                      "PAML.", Var[v], "_", aver, ".RData")
     load(v.path)
 }
 
-hy30.path <- paste0(data.path, "AMELIA_HH_level_", aver, "/",
+hy30.path <- paste0(data.path, 
                     "HAML.HY030_", aver, ".RData")
 load(hy30.path)
 
@@ -208,11 +208,11 @@ Clus_data <- kmeans(StdMean_AGE_SEX, 10)
 # Material Deprivation ----------------
 cat("Load AROPE variables...\n")
 for(v in c(1:8, 10:11)){
-    haml.path <- paste0(data.path, "AMELIA_HH_level_", aver, "/", "HAML.HS", 
+    haml.path <- paste0(data.path,  "HAML.HS", 
                         sprintf("%02d", v), "0","_", aver, ".RData")
     load(haml.path)
 }
-haml.hh050.path <- paste0(data.path,"AMELIA_HH_level_", aver, "/", "HAML.HH050_",
+haml.hh050.path <- paste0(data.path, "HAML.HH050_",
                           aver,".RData")
 load(haml.hh050.path)
 
@@ -231,7 +231,7 @@ for (i in 1:8){
 MD <- ifelse(test = rowSums(cbind(L1, L2, L3, L4, L5, L6, L7, L8, L9)) >= 3,
              yes = 1, no = 0)
 
-hid.path <- paste0(data.path, "AMELIA_HH_level_", aver, "/",
+hid.path <- paste0(data.path, 
                    "HAML.HID_", aver, ".RData")
 load(hid.path)
 
@@ -241,12 +241,12 @@ tabMD <- tapply(X = MD, INDEX = HID, FUN = sum)
 
 cat("AROPE low work intensity...\n")
 for(v in c(70, 72, 80, 85, 87, 90)){
-    paml.path <- paste0(data.path, "AMELIA_P_level_", aver, "/", "PAML.PL", 
+    paml.path <- paste0(data.path,  "PAML.PL", 
                        sprintf("%03d", v), "_", aver, ".RData")
     
     load(paml.path)
 }
-paml.hid.path <- paste0(data.path, "AMELIA_P_level_", aver, "/",
+paml.hid.path <- paste0(data.path, 
                         "PAML.HID_", aver, ".RData")
 load(paml.hid.path)
 
@@ -259,7 +259,7 @@ size <- tapply(X = !is.na(month_rat), INDEX = HID, FUN = sum)
 WORK_INT <- wi / size
 LWI <- as.vector(ifelse(test = WORK_INT <= 0.2, yes = 1, no = 0))
 
-haml.hid.path <- paste0(data.path, "AMELIA_HH_level_", aver, "/",
+haml.hid.path <- paste0(data.path, 
                         "HAML.HID_", aver, ".RData")
 load(haml.hid.path)
 
@@ -268,9 +268,9 @@ tabLWI <- tapply(X = LWI, INDEX = HID, FUN = sum)
 # At-risk-of-poverty ------------------
 
 cat("AROPE at risk of poverty...\n")
-paml.edi.path <- paste0(data.path, "AMELIA_P_level_", aver, "/",
+paml.edi.path <- paste0(data.path, 
                         "PAML.EDI_", aver, ".RData")
-paml.reg.path <- paste0(data.path, "AMELIA_P_level_", aver, "/",
+paml.reg.path <- paste0(data.path, 
                         "PAML.REG_", aver, ".RData")
 load(paml.edi.path); load(paml.reg.path)
 
@@ -279,7 +279,7 @@ ARP_P <- as.numeric(EDI < (0.6 * medEDIReg))
 
 # Transformation to person-level
 cat("Transform data from HH to P level...\n")
-paml.hid.path <- paste0(data.path, "AMELIA_P_level_", aver, "/",
+paml.hid.path <- paste0(data.path, 
                         "PAML.HID_", aver, ".RData")
 load(paml.hid.path)
 
@@ -326,7 +326,7 @@ cat("Load Household level simulation set...\n")
 
 data_H <- data_P[which(data_P$hid != hid_diff), c(1:5,8,14:15,20:23)]
 
-haml.hhs.path <- paste0(data.path, "AMELIA_HH_level_", aver, "/",
+haml.hhs.path <- paste0(data.path, 
                         "HAML.HHS_", aver, ".RData")
 load(haml.hhs.path)
 
